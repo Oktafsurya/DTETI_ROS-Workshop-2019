@@ -1,0 +1,6 @@
+gazebo_ros_control/pid_gains:
+  front_left_wheel: {p: 1.0, i: 0.0, d: 1.0}
+
+
+
+
