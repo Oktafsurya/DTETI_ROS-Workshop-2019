@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ros_demo)
+project(turtlesim_demo)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,11 +8,8 @@ project(ros_demo)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
-  actionlib_msgs
+  geometry_msgs
   roscpp
-  std_msgs
-  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -49,16 +46,18 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-   FILES
-   demo_msg.msg
- )
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
 
 ## Generate services in the 'srv' folder
-add_service_files(
-   FILES
-   demo_srv.srv
- )
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,11 +67,10 @@ add_service_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-   DEPENDENCIES
-   actionlib_msgs
-   std_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   geometry_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -105,8 +103,8 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES ros_demo
-  CATKIN_DEPENDS actionlib actionlib_msgs roscpp std_msgs
+  LIBRARIES turtlesim_demo
+  CATKIN_DEPENDS geometry_msgs roscpp
   DEPENDS system_lib
 )
 
@@ -117,36 +115,25 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
+ include
   ${catkin_INCLUDE_DIRS}
 )
 
 
-add_executable(demo_topic_publisher src/demo_topic_publisher.cpp)
-add_executable(demo_topic_subscriber src/demo_topic_subscriber.cpp)
-add_executable(demo_msg_publisher src/demo_msg_publisher.cpp)
-add_executable(demo_msg_subscriber src/demo_msg_subscriber.cpp)
-add_executable(demo_service_server src/demo_service_server.cpp)
-add_executable(demo_service_client src/demo_service_client.cpp)
+add_executable(velocity_publisher src/velocity_publisher.cpp)
+add_executable(pose_subscriber src/pose_subscriber.cpp)
+
+add_dependencies(velocity_publisher turtlesim_demo_generate_messages_cpp)
+add_dependencies(pose_subscriber turtlesim_demo_generate_messages_cpp)
+
+target_link_libraries(velocity_publisher  ${catkin_LIBRARIES})
+target_link_libraries(pose_subscriber  ${catkin_LIBRARIES})
 
 
-add_dependencies(demo_topic_publisher ros_demo_pkg_generate_messages_cpp)
-add_dependencies(demo_topic_subscriber ros_demo_generate_messages_cpp)
-add_dependencies(demo_msg_publisher ros_demo_pkg_generate_messages_cpp)
-add_dependencies(demo_msg_subscriber ros_demo_generate_messages_cpp)
-add_dependencies(demo_service_server ros_demo_generate_messages_cpp)
-add_dependencies(demo_service_client ros_demo_generate_messages_cpp)
-
-target_link_libraries(demo_topic_publisher  ${catkin_LIBRARIES})
-target_link_libraries(demo_topic_subscriber  ${catkin_LIBRARIES})
-target_link_libraries(demo_msg_publisher  ${catkin_LIBRARIES})
-target_link_libraries(demo_msg_subscriber  ${catkin_LIBRARIES})
-target_link_libraries(demo_service_server  ${catkin_LIBRARIES})
-target_link_libraries(demo_service_client  ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/ros_demo.cpp
+#   src/${PROJECT_NAME}/turtlesim_demo.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -157,7 +144,7 @@ target_link_libraries(demo_service_client  ${catkin_LIBRARIES})
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/ros_demo_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/turtlesim_demo_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -214,7 +201,7 @@ target_link_libraries(demo_service_client  ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_ros_demo.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_turtlesim_demo.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
