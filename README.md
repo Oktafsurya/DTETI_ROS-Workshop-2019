@@ -40,8 +40,8 @@ The main files for this demo is on **husky_highlevel_controller** folder.
 
 to run this demo:
 ```bash
-cd your_workspace
-roslaunch husky_highlevel_controller husky_test.launch
+$ cd your_workspace
+$ roslaunch husky_highlevel_controller husky_test.launch
 ```
 to view reading result from husky laser sensor on RVIZ:
 + add some obstacles in husky gazebo
