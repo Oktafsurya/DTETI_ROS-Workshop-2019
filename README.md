@@ -1,4 +1,12 @@
 # DTETI_ROS-Workshop-2019
+## Requirements
+to run all demo in this repository, you need:
++ ROS Kinetic
++ Husky Robot Simulator
++ RVIZ
++ Gazebo_ros_pkgs
++ catkin-pkg
+
 ## Week 1
 In the week 1, we learn about ROS basic concept like: create new workspace, package using some common dependencies, create a node with custom topic, message and service, and create launch file. You can see all files for week 1 on the **ros_demo** folder.
 
