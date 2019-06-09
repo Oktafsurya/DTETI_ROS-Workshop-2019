@@ -12,7 +12,7 @@ In the week 1, we learn about ROS basic concept like: create new workspace, pack
 
 to run one node:
 ```bash
-cd your_workspace
+$ cd your_workspace
 $ roscore
 $ rosrun ros_demo demo_msg_publisher
 $ rosrun ros_demo demo_msg_subscriber
